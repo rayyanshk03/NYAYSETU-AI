@@ -1,0 +1,154 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-10-29T21:02:23.769913+00:00",
+  "total_documents": 7,
+  "documents": [
+    {
+      "document_id": "hma_1955",
+      "title": "The Hindu Marriage Act, 1955 (Act No. 25 of 1955)",
+      "act_name": "Hindu Marriage Act, 1955",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/1567",
+      "local_filename": "hindu_marriage_act_1955.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "1955-05-18",
+      "effective_date": "1955-05-18",
+      "retrieval_date": null,
+      "document_version": "As modified up to date (India Code)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'hindu_marriage_act_1955.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/1567."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    },
+    {
+      "document_id": "sma_1954",
+      "title": "The Special Marriage Act, 1954 (Act No. 43 of 1954)",
+      "act_name": "Special Marriage Act, 1954",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/1547",
+      "local_filename": "special_marriage_act_1954.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "1954-10-09",
+      "effective_date": "1955-01-01",
+      "retrieval_date": null,
+      "document_version": "As modified up to date (India Code)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'special_marriage_act_1954.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/1547."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    },
+    {
+      "document_id": "hama_1956",
+      "title": "The Hindu Adoptions and Maintenance Act, 1956 (Act No. 78 of 1956)",
+      "act_name": "Hindu Adoptions and Maintenance Act, 1956",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/1640",
+      "local_filename": "hindu_adoptions_and_maintenance_act_1956.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "1956-12-21",
+      "effective_date": "1956-12-21",
+      "retrieval_date": null,
+      "document_version": "As modified up to date (India Code)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'hindu_adoptions_and_maintenance_act_1956.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/1640."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    },
+    {
+      "document_id": "pwdva_2005",
+      "title": "The Protection of Women from Domestic Violence Act, 2005 (Act No. 43 of 2005)",
+      "act_name": "Protection of Women from Domestic Violence Act, 2005",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/2085",
+      "local_filename": "protection_of_women_from_domestic_violence_act_2005.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "2005-09-13",
+      "effective_date": "2006-10-26",
+      "retrieval_date": null,
+      "document_version": "As modified up to date (India Code)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'protection_of_women_from_domestic_violence_act_2005.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/2085."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    },
+    {
+      "document_id": "gwa_1890",
+      "title": "The Guardians and Wards Act, 1890 (Act No. 8 of 1890)",
+      "act_name": "Guardians and Wards Act, 1890",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/2296",
+      "local_filename": "guardians_and_wards_act_1890.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "1890-03-21",
+      "effective_date": "1890-07-01",
+      "retrieval_date": null,
+      "document_version": "As modified up to date (India Code)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'guardians_and_wards_act_1890.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/2296."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    },
+    {
+      "document_id": "crpc_sec_125",
+      "title": "Code of Criminal Procedure, 1973 — Order for Maintenance of Wives, Children and Parents (Sections 125-128)",
+      "act_name": "CrPC 1973 / BNSS 2023 (Maintenance Provisions)",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/1611",
+      "local_filename": "crpc_section_125_maintenance.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "1974-01-25",
+      "effective_date": "1974-04-01",
+      "retrieval_date": null,
+      "document_version": "Relevant Extract (Sections 125-128)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'crpc_section_125_maintenance.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/1611."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    },
+    {
+      "document_id": "fca_1984",
+      "title": "The Family Courts Act, 1984 (Act No. 66 of 1984)",
+      "act_name": "Family Courts Act, 1984",
+      "official_source_url": "https://www.indiacode.nic.in/handle/123456789/1944",
+      "local_filename": "family_courts_act_1984.pdf",
+      "source_authority": "Legislative Department, Ministry of Law and Justice, Government of India (India Code)",
+      "publication_date": "1984-09-14",
+      "effective_date": "1984-09-14",
+      "retrieval_date": null,
+      "document_version": "As modified up to date (India Code)",
+      "processing_status": "missing_raw_file",
+      "extraction_warnings": [
+        "PDF file 'family_courts_act_1984.pdf' not yet placed in data/raw/. Download from https://www.indiacode.nic.in/handle/123456789/1944."
+      ],
+      "document_hash": null,
+      "page_count": 0,
+      "chunk_count": 0,
+      "file_size_bytes": 0,
+      "last_processed_at": null
+    }
+  ]
+}
