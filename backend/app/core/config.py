@@ -35,6 +35,14 @@ class Settings(BaseSettings):
     # Similarity threshold: queries below this minimum score return insufficient evidence result
     MIN_SIMILARITY_SCORE: float = 0.25
 
+    # Hybrid Retrieval & Reranker Settings
+    ENABLE_HYBRID_RETRIEVAL: bool = True
+    HYBRID_DENSE_CANDIDATES: int = 20
+    HYBRID_SPARSE_CANDIDATES: int = 20
+    ENABLE_RERANKER: bool = True
+    RERANKER_MODEL_NAME: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    RERANKER_TOP_K: int = 5
+
     # Step 4: Configurable LLM Provider Settings
     # Providers supported: 'template' (deterministic local fallback with 0 API keys),
     #                      'ollama' (local Ollama instance),

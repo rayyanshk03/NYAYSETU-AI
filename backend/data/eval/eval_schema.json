@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NyayaSetu AI Legal RAG Evaluation Dataset Schema",
+  "description": "Standard schema for evaluating legal retrieval, ranking, and synthesis accuracy on Indian family-law Acts.",
+  "type": "object",
+  "required": ["version", "created_date", "queries"],
+  "properties": {
+    "version": { "type": "string", "example": "1.0.0" },
+    "created_date": { "type": "string", "example": "2026-11-01" },
+    "description": { "type": "string" },
+    "integrity_policy": {
+      "type": "string",
+      "const": "Only queries with reviewer_status == 'reviewed' are scored in official benchmark metrics."
+    },
+    "queries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["query_id", "query", "language", "expected_document_ids", "expected_section_ids", "reviewer_status"],
+        "properties": {
+          "query_id": { "type": "string" },
+          "query": { "type": "string" },
+          "language": { "type": "string", "enum": ["en", "hi", "kn"] },
+          "legal_topic": { "type": "string" },
+          "expected_document_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Document IDs as registered in ChromaDB metadata (e.g. A1955-25)"
+          },
+          "expected_section_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Statutory section numbers expected in relevant passages (e.g. 13B)"
+          },
+          "expected_answer_points": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Key statutory legal concepts that must be represented in grounded answer"
+          },
+          "reviewer_status": {
+            "type": "string",
+            "enum": ["reviewed", "draft", "unreviewed"]
+          },
+          "reviewer_notes": { "type": "string" }
+        }
+      }
+    }
+  },
+  "sample_queries": [
+    {
+      "query_id": "eval_en_01",
+      "query": "What are the requirements for mutual consent divorce under the Hindu Marriage Act?",
+      "language": "en",
+      "legal_topic": "divorce_mutual_consent",
+      "expected_document_ids": ["A1955-25"],
+      "expected_section_ids": ["13B"],
+      "expected_answer_points": [
+        "Petition presented jointly by both parties to the marriage",
+        "Living separately for a period of one year or more",
+        "Not been able to live together",
+        "Mutually agreed that the marriage should be dissolved"
+      ],
+      "reviewer_status": "unreviewed",
+      "reviewer_notes": "Pending formal sign-off by practicing family law advocate."
+    },
+    {
+      "query_id": "eval_hi_01",
+      "query": "पारस्परिक सहमति से विवाह विच्छेद के क्या नियम हैं?",
+      "language": "hi",
+      "legal_topic": "divorce_mutual_consent",
+      "expected_document_ids": ["A1955-25"],
+      "expected_section_ids": ["13B"],
+      "expected_answer_points": [
+        "दोनों पक्षों द्वारा संयुक्त याचिका",
+        "एक वर्ष या उससे अधिक समय से अलग रहना"
+      ],
+      "reviewer_status": "unreviewed",
+      "reviewer_notes": "Pending formal sign-off by Hindi-speaking legal scholar."
+    },
+    {
+      "query_id": "eval_kn_01",
+      "query": "ಪರಸ್ಪರ ಸಮ್ಮತಿಯ ವಿಚ್ಛೇದನಕ್ಕೆ ಇರುವ ನಿಯಮಗಳೇನು?",
+      "language": "kn",
+      "legal_topic": "divorce_mutual_consent",
+      "expected_document_ids": ["A1955-25"],
+      "expected_section_ids": ["13B"],
+      "expected_answer_points": [
+        "ಇಬ್ಬರೂ ಒಟ್ಟಾಗಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಬೇಕು",
+        "ಕನಿಷ್ಠ ಒಂದು ವರ್ಷ ಪ್ರತ್ಯೇಕವಾಗಿ ವಾಸಿಸಿರಬೇಕು"
+      ],
+      "reviewer_status": "unreviewed",
+      "reviewer_notes": "Pending formal sign-off by Kannada-speaking advocate."
+    }
+  ]
+}

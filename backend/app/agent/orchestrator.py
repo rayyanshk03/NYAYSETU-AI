@@ -19,6 +19,7 @@ from app.agent.synthesizer import LegalSynthesizer, SynthesizedResult, synthesiz
 from app.agent.safety import SafetyAuditor, safety_auditor as default_safety_auditor
 from app.agent.language_detector import LanguageDetector, language_detector as default_language_detector
 from app.rag.retrieval import LegalRetriever, retrieval_service as default_retriever
+from app.rag.hybrid_retriever import HybridRetriever, hybrid_retrieval_service as default_hybrid_retriever
 from app.schemas.chat import ChatRequest, ChatResponse, SupportedLanguage
 from app.schemas.retrieval import RetrievedPassage
 
@@ -43,7 +44,7 @@ class LegalAgent:
     1. Language Resolution — explicit user choice takes priority; auto-detects otherwise; prompts user if uncertain
     2. Safety Check — screen for immediate physical danger / crisis; route to 112/181 if found
     3. Plan — classify intent and build retrieval sub-queries
-    4. Retrieve — search ChromaDB for relevant statutory passages
+    4. Retrieve — hybrid search (dense ChromaDB + sparse BM25 + RRF + cross-encoder rerank)
        - Per-sub-query exception isolation: one failure does not abort the pipeline
        - Query-text deduplication: same text is not sent to the retriever twice
     5. Deduplicate & rank passages by chunk_id
@@ -55,13 +56,13 @@ class LegalAgent:
     def __init__(
         self,
         planner: Optional[QueryPlanner] = None,
-        retriever: Optional[LegalRetriever] = None,
+        retriever: Optional[Any] = None,
         synthesizer: Optional[LegalSynthesizer] = None,
         safety: Optional[SafetyAuditor] = None,
         language_detector: Optional[LanguageDetector] = None,
     ):
         self.planner = planner or default_planner
-        self.retriever = retriever or default_retriever
+        self.retriever = retriever or default_hybrid_retriever
         self.synthesizer = synthesizer or default_synthesizer
         self.safety = safety or default_safety_auditor
         self.language_detector = language_detector or default_language_detector

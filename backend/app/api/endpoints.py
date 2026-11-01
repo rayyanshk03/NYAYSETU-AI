@@ -1,5 +1,6 @@
 """FastAPI endpoints for NyayaSetu AI — Step 4: Agentic AI Layer."""
 
+from dataclasses import asdict
 from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException, Query, status
 from app.core.config import settings
@@ -8,6 +9,8 @@ from app.schemas.chat import ChatRequest, ChatResponse
 from app.schemas.retrieval import RetrievalRequest, RetrievalResponse
 from app.services.chat_service import chat_service
 from app.rag.retrieval import retrieval_service
+from app.rag.hybrid_retriever import hybrid_retrieval_service
+from app.rag.audit import CorpusAuditor
 
 api_router = APIRouter()
 
@@ -40,7 +43,7 @@ async def get_health() -> HealthResponse:
     status_code=status.HTTP_200_OK,
     summary="Process Legal Query (Agentic)",
     description=(
-        "Runs the full agentic pipeline: query planning → legal retrieval → "
+        "Runs the full agentic pipeline: query planning → hybrid retrieval → "
         "grounded answer synthesis. Returns a response with statutory citations, "
         "retrieved passages, and the agent execution trace."
     ),
@@ -50,24 +53,23 @@ async def post_chat(request: ChatRequest) -> ChatResponse:
     return chat_service.process_request(request)
 
 
-# ── Retrieval (Development / Inspection Endpoint) ───────────────────────────
+# ── Retrieval (Hybrid Retrieval Endpoint) ───────────────────────────────────
 
 @api_router.post(
     "/retrieve",
     response_model=RetrievalResponse,
     status_code=status.HTTP_200_OK,
-    summary="Raw Legal Retrieval",
+    summary="Hybrid Legal Retrieval",
     description=(
-        "Development-mode direct access to the ChromaDB retrieval layer. "
-        "Returns raw retrieved passages with similarity scores and metadata "
-        "for inspection without answer synthesis. "
-        "Useful for evaluating retrieval quality before and after indexing."
+        "Production hybrid retrieval layer combining ChromaDB dense vector similarity, "
+        "BM25 sparse keyword search, Reciprocal Rank Fusion (RRF), and Cross-Encoder reranking. "
+        "Returns retrieved passages with similarity scores, provenance, and latency metadata."
     ),
-    tags=["Development"],
+    tags=["Retrieval"],
 )
 async def post_retrieve(request: RetrievalRequest) -> RetrievalResponse:
-    """Execute raw vector retrieval over the indexed legal corpus."""
-    return retrieval_service.retrieve(
+    """Execute hybrid retrieval over the indexed legal corpus."""
+    return hybrid_retrieval_service.retrieve(
         query=request.query,
         top_k=request.top_k,
         language=request.language,
@@ -76,24 +78,27 @@ async def post_retrieve(request: RetrievalRequest) -> RetrievalResponse:
     )
 
 
-# ── Corpus Status ───────────────────────────────────────────────────────────
+# ── Corpus Status & Audit ───────────────────────────────────────────────────
 
 @api_router.get(
     "/corpus/status",
     status_code=status.HTTP_200_OK,
     summary="Knowledge Base Status",
     description="Returns the total number of indexed legal provisions and collection metadata.",
-    tags=["Development"],
+    tags=["Corpus"],
 )
 async def get_corpus_status():
     """Return how many legal chunks are currently indexed in ChromaDB."""
-    count = retrieval_service.vector_store.count()
+    count = hybrid_retrieval_service.vector_store.count()
     return {
         "indexed_provisions": count,
-        "collection_name": retrieval_service.vector_store.collection_name,
+        "collection_name": hybrid_retrieval_service.vector_store.collection_name,
         "status": "ready" if count > 0 else "empty",
+        "hybrid_retrieval_enabled": settings.ENABLE_HYBRID_RETRIEVAL,
+        "reranker_enabled": settings.ENABLE_RERANKER,
+        "reranker_model": settings.RERANKER_MODEL_NAME,
         "message": (
-            f"{count} legal provisions indexed and ready for retrieval."
+            f"{count} legal provisions indexed and ready for hybrid retrieval."
             if count > 0
             else (
                 "Knowledge base is empty. Download official Bare Act PDFs into data/raw/, "
@@ -102,3 +107,17 @@ async def get_corpus_status():
         ),
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
+
+
+@api_router.post(
+    "/corpus/audit",
+    status_code=status.HTTP_200_OK,
+    summary="Run Corpus Audit",
+    description="Audits raw PDFs, processed JSONLs, metadata quality, and checksum duplicates.",
+    tags=["Corpus"],
+)
+async def run_corpus_audit():
+    """Run corpus auditor and return detailed quality audit report."""
+    auditor = CorpusAuditor()
+    report = auditor.run()
+    return asdict(report)
